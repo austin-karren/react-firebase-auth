@@ -126,6 +126,7 @@ const AuthProvider = ({ children }) => {
    }
 
    useEffect(() => {
+      // onAuthStateChanged() is only necessary for signInWithRedirect because signInWithPopup can be used with promises.
       auth.onAuthStateChanged(async authUser => {
          if(authUser) {
             const redirectResult = await googleSignInRedirectResult();
