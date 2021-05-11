@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import 'firebase/auth';
 
 const firebaseConfig = {
    // paste your firebase config from your firebase app here

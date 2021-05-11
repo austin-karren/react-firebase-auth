@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react';
 import Axios from 'axios';
-import { setAuthHeader, deleteAuthHeader } from '@utils/headers';
+import { setAuthHeader, deleteAuthHeader } from '../utils/headers';
 import {
    auth,
    createUserWithEmailAndPassword,
@@ -8,7 +8,7 @@ import {
    sendPasswordResetEmail,
    signInWithGoogle,
    signInWithFacebook
-} from '@utils/firebase';
+} from '../utils/firebase';
 import axios from 'axios';
 
 export const AuthContext = createContext({
@@ -35,6 +35,10 @@ const AuthProvider = ({ children }) => {
       createUserWithEmailAndPassword(email, password)
       .then((result) => {
          const user = result.user;
+
+         // normally you would set user with the response data from your server
+         setProvider({ user });
+
          setAuthHeader();
 
          // post to your server here with user data
@@ -67,7 +71,12 @@ const AuthProvider = ({ children }) => {
    const signAccountInWithEmailAndPassword = async (e, email, password) => {
       e.preventDefault();
       signInWithEmailAndPassword(email, password)
-      .then(() => {
+      .then((result) => {
+         const user = result.user;
+
+         // normally you would set user with the response data from your server
+         setProvider({ user });
+
          setAuthHeader();
 
          // post to your server here with auth token
@@ -121,12 +130,17 @@ const AuthProvider = ({ children }) => {
          if(authUser) {
             const redirectResult = await googleSignInRedirectResult();
 
+            const user = authUser;
+            // normally you would set user with the response data from your server
+            setProvider({ user });
+
             if(!redirectResult) {
                await setAuthHeader();
-
+               
                // post to your server with auth header
 
                // Axios.post('api/your-server', {}).then().catch();
+               // retrieve data from your server about your user
             }
          } else {
             signOut();

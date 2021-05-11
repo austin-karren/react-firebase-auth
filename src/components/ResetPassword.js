@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '@providers/AuthProvider';
+import { AuthContext } from '../providers/AuthProvider';
 
 const PasswordReset = props => {
    const context = useContext(AuthContext)

@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '@providers/AuthProvider';
+import { AuthContext } from '../providers/AuthProvider';
+import SignInWithProvider from './SignInWithProvider';
 
 const SignIn = (props) => {
    const context = useContext(AuthContext);
 
    const [email, setEmail] = useState(''),
-   [password, setPassword] = useState(''),
+   [password, setPassword] = useState('');
 
    const handleSignIn = (event, email, password) => {
       context.signAccountInWithEmailAndPassword(event, email, password);
@@ -31,6 +32,8 @@ const SignIn = (props) => {
       
          <div className='signIn'>
             <h1>Sign in</h1>
+            <SignInWithProvider />
+            <div style={{margin: '2rem'}}/>
             <label>
                email
             </label>
@@ -39,7 +42,7 @@ const SignIn = (props) => {
                name='userEmail'
                value={email}
                placeholder='example@email.com'
-               id={userEmail}
+               id='userEmail'
                onChange={e => onChangeInputs(e)}
             />
             <label>

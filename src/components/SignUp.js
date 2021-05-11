@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '@providers/AuthProvider';
+import { AuthContext } from '../providers/AuthProvider';
+import SignInWithProvider from './SignInWithProvider';
 
 const SignUp = () => {
    const context = useContext(AuthContext);
 
    const [email, setEmail] = useState(''),
-   [password, setPassword] = useState(''),
+   [password, setPassword] = useState('');
 
    const handleSignUp = (event, email, password) => {
       context.createAccountWithEmailAndPassword(event, email, password);
@@ -31,6 +32,8 @@ const SignUp = () => {
       
          <div className='SignUp'>
             <h1>Sign up</h1>
+            <SignInWithProvider />
+            <div style={{margin: '2rem'}}/>
             <label>
                email
             </label>
@@ -39,7 +42,7 @@ const SignUp = () => {
                name='userEmail'
                value={email}
                placeholder='example@email.com'
-               id={userEmail}
+               id='userEmail'
                onChange={e => onChangeInputs(e)}
             />
             <label>
@@ -59,7 +62,7 @@ const SignUp = () => {
             <p>
                Already have an account?{' '}
                <Link to='/'>
-                  Sign up here
+                  Sign in here
                </Link>{' '}
                <br />{' '}
                <Link to='/password-reset'>
